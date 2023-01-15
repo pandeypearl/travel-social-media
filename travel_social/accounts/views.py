@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth import views as auth_views
@@ -15,7 +15,7 @@ class SignUpView(generic.CreateView):
 def logout_view(request):
     logout(request)
     messages.info(request, 'You have successfully logged out.')
-    return redirect(request, 'login')
+    return redirect(reverse('social:index'))
 
 def login_view(request):
     if request.method == "POST":
