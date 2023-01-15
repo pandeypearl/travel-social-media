@@ -1,27 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+{% extends 'base.html' %}
+
+{% block title %}All Posts{% endblock %}
+
+{% block content %}
     {% if all_posts %}
-    <ul>    
-        {% for post in all_posts %}
-        <li>
-            <a href="{% url 'social:detail' post.id %}">{{ post.title}}</a>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>No posts yet</p>
-    {% endif %}
+        <ul>    
+            {% for post in all_posts %}
+            <li>
+                <a href="{% url 'social:detail' post.id %}">{{ post.title}}</a>
+                <span style="display:block;">{{ post.destination }}</span>
+                <span style="display:block;">{{ post.dest_type }}</span>
+                <span style="display:block;">{{ post.location }}</span>
+                <img src="uploads/{{ post.image.url }}" alt="{{ post.destination}}">
+                <span style="display:block;">{{ post.location }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No posts yet</p>
+        {% endif %}
 
     <a href="{% url 'social:create_post' %}">create post</a>
 
+{% endblock %}
     
-</body>
-</html>
+    
