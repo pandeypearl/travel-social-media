@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block title %}All Posts{% endblock %}
 
@@ -11,7 +13,7 @@
                 <span style="display:block;">{{ post.destination }}</span>
                 <span style="display:block;">{{ post.dest_type }}</span>
                 <span style="display:block;">{{ post.location }}</span>
-                <img src="uploads/{{ post.image.url }}" alt="{{ post.destination}}">
+                <img src="{{ post.image.url }}" alt="{{ post.destination}}" width="200" height="auto">
                 <span style="display:block;">{{ post.location }}</span>
             </li>
             {% endfor %}

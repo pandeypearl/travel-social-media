@@ -1,0 +1,21 @@
+<div id="likesarea">
+    <span>
+        {{post.likes.count}} 
+        {% if post.likes.count == 1 %}
+            like
+        {% else %}
+            likes
+        {% endif %}
+    </span>
+
+    <span>
+        <button hx-post="{% url 'social:like_post' post.id %}" 
+        id="like-button" hx-target="#likesarea" hx-swap="outerHTML">
+        {% if request.user in post.likes.all %}
+        <i class="bi bi-balloon-heart-fill"></i>
+        {% else %}
+        <i class="bi bi-balloon-heart"></i>
+        {% endif %}
+        </button>
+    </span>
+</div>
