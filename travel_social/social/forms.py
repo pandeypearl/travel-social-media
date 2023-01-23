@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django.db.models import fields
 from django import forms
 from .models import Post, Comment
 
@@ -22,9 +23,11 @@ class PostForm(forms.ModelForm):
         
 
 class CommentForm(forms.ModelForm):
-    text = forms.TextInput()
+    text = forms.Textarea()
     class Meta:
         model = Comment
-        fields = ['text'] 
+        fields = (
+            'text',
+        ) 
         widgets = {'text': forms.Textarea(attrs={'placeholder': 'comment'})}
         labels = {'text' : ''}

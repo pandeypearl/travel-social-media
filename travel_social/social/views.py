@@ -19,24 +19,23 @@ def index(request):
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    comment = Comment.objects.get(pk=post_id)
-    form = CommentForm(request.POST, request.FILES)
+    form = CommentForm(request.POST)
 
     if request.method == 'POST':
-        form = CommentForm(request.POST, request.FILES)
-        print(request.POST)
+        form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
+            comment.post = post
             comment.user = request.user
             comment.created = timezone.now()
             comment.text = request.POST['text']
             comment.save()
-        else:
-            form: CommentForm()
+            return redirect('social:detail', post.id)
+    else:
+        form: CommentForm()
 
     context = {
         'post': post,
-        'comment': comment,
         'form': form,
     }
     return render(request, 'social/detail.html', context)

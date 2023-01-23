@@ -2,10 +2,10 @@
     <h3>Comments</h3>
     {{post.Comments.count}}
 
-    <form action="{% url 'social:detail' post.id %}">
+    <form action="{% url 'social:detail' post.id %}" method="POST">
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit">comment</button>
+        <button type="submit" value="Submit">comment</button>
     </form>
     {% if not post.Comments.all %}
     This post has no comments yet...
