@@ -12,14 +12,14 @@ class PostForm(forms.ModelForm):
     content = forms.Textarea()
     class Meta:
         model = Post
-        fields = [
+        fields = (
             'title',
             'destination',
             'dest_type',
             'location',
             'image',
             'content',
-        ]
+        )
         
 
 class CommentForm(forms.ModelForm):
