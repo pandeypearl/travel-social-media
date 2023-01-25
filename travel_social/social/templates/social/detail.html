@@ -3,35 +3,178 @@
 
 {% block title %}{{ post.title }} - @{{  post.user }}{% endblock%}
 
+{% block styles %}
+.detail-container{
+    display: flex;
+    color: var(--gunmetal);
+    height: 600px;
+    width: 100%;
+}
+
+.post-image img{
+    width: 450px;
+    height: 600px;
+    object-fit: cover;
+}
+
+.post-text{
+    background-color: white;
+    position: relative;
+    padding: 30px;
+}
+
+.edit-btn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: var(--blush);
+    color: ivory;
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-text hr{
+    border: none;
+    border-top: 1px solid var(--ivory);
+}
+
+.post-text h1{
+    margin:0;
+    font-size: 1.5rem;
+}
+
+.post-text h2{
+    margin-bottom:0;
+    font-size: 1.3rem;
+}
+
+.post-text h3{
+    margin:0;
+    font-size: 1rem;
+}
+
+.post-description{
+    display: flex;
+    gap: 20px;
+}
+
+.post-content{
+    height: 350px;
+    padding-right: 20px;
+    overflow-y: scroll;
+    scrollbar-color: var(--gunmetal) var(--ivory);
+    scrollbar-width: thin;
+}
+
+.analytics{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    gap: 20px;
+}
+
+.analytics #likesarea button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding:0;
+    margin:0;
+}
+
+.analytics #likesarea button:hover{
+    color: var(--blush);
+}
+
+.analytics #likesarea button i{
+    font-size: 16px;
+}
+
+.comment-section{
+    margin: 50px 0;
+}
+
+.comment-section textarea{
+    border-radius: 10px;
+    border:none;
+    resize: none;
+    width: 60%;
+    height: 50px;
+    padding: 10px;
+}
+
+.comment-section form button{
+    background-color: var(--blush);
+    color: var(--ivory);
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    box-shadow: var(--shadow-3);
+}
+
+.comment-text{
+    margin: 30px 0;
+}
+
+{% endblock %}
+
 {% block content %}
-<div>
-    <img src="{{post.image.url}}" alt="{{ post.location }}">
+<div class="detail-container">
+    <div class="post-image">
+        <img src="{{post.image.url}}" alt="{{ post.location }}">
+    </div>
+
+    <div class="post-text">
+        <div>
+            <h1>{{ post.title }}</h1>
+            <small>{{ post.created|date:"d F Y" }}</small>
+            {% if user.is_authenticated and request.user == post.user %}
+            <a class="edit-btn" href="{% url 'social:edit_post' pk=post.pk %}"><i class="bi bi-pencil-fill"></i></a>
+            {% endif %}
+        </div>
+        
+        <div class="post-description">
+            <div>
+                <h2>{{ post.destination }}</h2>
+                <h3>{{ post.location }}</h3>
+            </div>
+            <h4>-</h4>
+            <div>
+                <h4>{{ post.dest_type }}</h4>
+            </div>
+        </div>
+
+        <hr>
+    
+        <div class="post-content">
+            <p>{{ post.content }}</p>
+        </div>
+
+        <hr>
+    
+        
+        <div class="analytics">
+            <div>{{post.Comments.count}}&nbsp;<i class="bi bi-chat"></i></div>
+            {% include 'social/likes.html' %}
+        </div>
+        
+        
+    </div>
+
 </div>
 
-<div>
-    <div>
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.created }}</p>
-        {% if user.is_authenticated %}
-        <a href="{% url 'social:edit_post' pk=post.pk %}">edit post</a>
-        {% endif %}
-    </div>
-    
-    <div>
-        <h2>{{ post.destination }}</h2>
-        <h3>{{ post.dest_type }}</h3>
-        <h4>{{ post.location }}</h4>
-    </div>
+{% include 'social/comment.html' %}
 
-    <div>
-        <p>{{ post.content }}</p>
-    </div>
 
-    {% include 'social/likes.html' %}
 
-    {% include 'social/comment.html' %}
-    
-</div>
+
 {% endblock%}
 
 {% block js %}

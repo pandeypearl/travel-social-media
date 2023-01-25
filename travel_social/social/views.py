@@ -19,7 +19,7 @@ def index(request):
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    form = CommentForm(request.POST)
+    form = CommentForm()
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
