@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Travel Social{% endblock %}
+
+{% block styles %}
+.posts-container{
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 50px;
+    padding-left:0;
+}
+
+.post-item{
+    width 30%;
+    position: relative;
+    
+}
+
+.post-item a {
+    color: black;
+    text-decoration: none;
+}
+
+.post-item img{
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: var(--shadow-4);
+}
+
+.item-overlay{
+    position: absolute;
+    bottom: 4px;
+    left:0;
+    right:0;
+    background-color: rgb(255, 255, 255, 0.6);
+    padding: 10px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 8px 8px;
+}
+{% endblock %}
+
+{% block content %}
+    {% if posts %}
+    <ul>
+        {% for post in posts %}
+        <li class="post-item">
+            <a href="{% url 'social:detail' post.id %}">
+            
+                <!--<span style="display:block;">{{ post.dest_type }}</span>
+                <span style="display:block;">{{ post.location }}</span>-->
+                <img src="{{ post.image.url }}" alt="{{ post.destination}}" width="" height="">
+                <div class="item-overlay">
+                    <div>
+                        <span>{{post.title}}</span>
+                        <span style="display:block;"><small style="font-weight: 600;">{{ post.destination }}</small></span>
+                    </div>
+
+                    <div>
+                        <span>{{post.Comments.count}}&nbsp;<i class="bi bi-chat"></i></span>
+                        <span style="margin:0 10px;">{{post.likes.count}}&nbsp;<i class="bi bi-balloon-heart"></i></span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>No posts yet</p>
+        <a href="{% url 'social:create_post' %}">create post</a>
+    {% endif %}
+{% endblock %}
