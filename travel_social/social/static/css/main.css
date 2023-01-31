@@ -15,14 +15,27 @@
 
 html{
     background-color: whitesmoke;
+    position: relative;   
+    font-family: 'Roboto', sans-serif;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gunmetal) var(--ivory);
     
 }
 
 .body{
-    padding: 30px;
-    margin 0;
+    position: absolute;
+    padding: 30px!important;
+    margin: 0;
+    color: var(--gunmetal);
 }
 
-nav{
- background-color: var(--ivory);
+.wrapper{
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.container{
+    width: 80%;
 }

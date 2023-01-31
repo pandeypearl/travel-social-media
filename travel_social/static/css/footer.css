@@ -1,0 +1,15 @@
+footer{
+    text-align: right;
+    width: 80%;
+    margin: 0 auto;
+}
+
+footer a{
+    text-decoration: none;
+    color: var(--blush);
+    font-weight: 900;
+}
+
+footer a:hover{
+    text-decoration: underline;
+}
