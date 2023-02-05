@@ -1,14 +1,19 @@
+ul {
+    list-style-type: none;
+    margin: 100px 0;
+}
+
 .posts-container{
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    gap: 50px;
+    gap: 20px;
     padding-left:0;
 }
 
 .post-item{
-    width 30%;
+    width: 300px;
     position: relative;
     
 }

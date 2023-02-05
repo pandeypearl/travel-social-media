@@ -23,9 +23,9 @@ html{
     
 }
 
-.body{
+body{
     position: absolute;
-    padding: 30px!important;
+    padding: 30px;
     margin: 0;
     color: var(--gunmetal);
 }

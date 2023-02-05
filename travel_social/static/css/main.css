@@ -16,8 +16,27 @@
 html{
     background-color: whitesmoke;
     margin:0;
+    position: relative;   
+    font-family: 'Roboto', sans-serif;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gunmetal) var(--ivory);
 }
 
-nav{
-
+body{
+    position: absolute;
+    padding: 50px;
+    margin: 0;
+    color: var(--gunmetal);
 }
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.container{
+    width: 85%;
+}
+
